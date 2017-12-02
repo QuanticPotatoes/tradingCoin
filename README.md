@@ -1,6 +1,6 @@
-# exar-pour-les-nuls
+# :moneybag: tradingCoin :moneybag:
 
-A support courses application 
+Trading application for crypto concurrency
 
 ## Build Setup
 

@@ -1,73 +1,53 @@
 <template>
     <v-app id="example-1">
-        <v-navigation-drawer persistent v-model="drawer">
-            <v-list>
-                <v-list-tile>
-                    <v-list-tile-content>
-                        <v-list-tile-title >
-                            <span>Menu</span>
-                        </v-list-tile-title>
-                    </v-list-tile-content>
-                </v-list-tile>
-                <v-divider></v-divider>
-                <template v-for="(item, index) in items">
-                    <v-list-tile :href="item.href" :to="{name: item.href}">
-                        <v-list-tile-action>
-                            <v-icon light v-html="item.icon"></v-icon>
-                        </v-list-tile-action>
-                        <v-list-tile-content>
-                            <v-list-tile-title v-html="item.title"></v-list-tile-title>
-                        </v-list-tile-content>
-                    </v-list-tile>
-                </template>
-            </v-list>
-        </v-navigation-drawer>
-        <v-toolbar class="indigo" dark>
-            <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-            <v-toolbar-title>Exar pour les nuls</v-toolbar-title>
-            <v-spacer></v-spacer>
-            <v-btn icon @click.native.stop="openGithub()">
-                <v-icon>home</v-icon>
-            </v-btn>
-        </v-toolbar>
-        <main>
-            <v-fade-transition mode="out-in">
-                <router-view></router-view>
-            </v-fade-transition>
+        <transition name="fade">
+        <div v-if="!showLogin">
+            <main>
+                <v-toolbar>
+                    <v-toolbar-title>{{ $t('title') }}</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                        <v-btn flat @click.stop="toogleLogin">
+                            {{ $t('login') }}
+                        </v-btn>
+                    <v-btn flat>
+                        {{ $t('signup') }}
+                    </v-btn>
+                </v-toolbar>
+            <transition name="fade">
+                <keep-alive>
+                    <router-view></router-view>
+                </keep-alive>
+            </transition>
         </main>
-        <v-footer class="indigo" dark>
-            <span>© 2017 - disjfa</span>
-        </v-footer>
+        </div>
+        <loginDialog v-else></loginDialog>
+        </transition>
     </v-app>
 </template>
 
 <script type="text/babel">
+  import { mapActions, mapGetters } from 'vuex';
+  import store from './store';
+  import loginDialog from './components/loginDialog.vue';
   export default {
+    store,
+    components: {
+        loginDialog,
+    },
     data() {
-      return {
-        drawer: true,
-        items: [{
-          href: 'home',
-          router: true,
-          title: 'Home',
-          icon: 'home',
-        }, {
-          href: 'examples',
-          router: true,
-          title: 'Example',
-          icon: 'extension',
-        }, {
-          href: 'about',
-          router: true,
-          title: 'About',
-          icon: 'domain',
-        }],
-      };
+        return {
+            drawer: true,
+        }
+    },
+    computed: {
+        ...mapGetters([
+            "showLogin"
+        ])
     },
     methods: {
-      openGithub() {
-        window.open('https://github.com/disjfa/vuetify-sidebar-template');
-      },
+        ...mapActions([
+            "toogleLogin"
+        ])
     },
   };
 </script>

@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
+import Polyglot from 'vue-polyglot';
+import store from './store';
 import App from './App.vue';
 import HomePage from './pages/HomePage.vue';
 import AboutPage from './pages/AboutPage.vue';
@@ -37,8 +39,14 @@ const router = new VueRouter({
 Vue.use(Vuetify);
 Vue.use(VueRouter);
 
+Vue.use(Polyglot, {
+  defaultLanguage: 'en',
+  languagesAvailable: ['en']
+});
+Vue.locales(require('./i18n'));
+
 new Vue({ // eslint-disable-line no-new
   el: '#app',
   router,
-  render: h => h(App),
+  render: h => h(App)
 });
