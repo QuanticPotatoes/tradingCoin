@@ -13,10 +13,13 @@
                                 type="email"
                                 v-model="email"
                                 :disabled="isLoading"
+                                :rules="[() => 'Username or Password is incorrect.']"
+                                error
                                 required
                             >
                             </v-text-field>
                             <v-text-field
+                                @keydown.enter="logUser({ email, password })"
                                 label="Password"
                                 type="password"
                                 v-model="password"

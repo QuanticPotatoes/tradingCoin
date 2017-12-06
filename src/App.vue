@@ -1,19 +1,28 @@
 <template>
     <v-app id="example-1">
-        <transition name="fade">
+        <transition>
         <div v-if="!showLogin">
             <main>
-                <v-toolbar>
-                    <v-toolbar-title>{{ $t('title') }}</v-toolbar-title>
+                <v-toolbar class="elevation-0 transparent" style="z-index: 1;">
+                    <v-toolbar-title style="color: white;">
+                        <h6><v-icon style="color: white;">equalizer</v-icon> {{ $t('title') }}</h6>
+                        </v-toolbar-title>
                     <v-spacer></v-spacer>
+                    <div v-if="!isAuth">
                         <v-btn flat @click.stop="toogleLogin">
-                            {{ $t('login') }}
+                                {{ $t('login') }}
                         </v-btn>
-                    <v-btn flat>
-                        {{ $t('signup') }}
-                    </v-btn>
+                        <v-btn outline round>
+                            {{ $t('signup') }}
+                        </v-btn>
+                    </div>
+                    <div v-else>
+                        <v-btn outline round>
+                            {{ $t('disconnect') }}
+                        </v-btn>
+                    </div>
                 </v-toolbar>
-            <transition name="fade">
+            <transition>
                 <keep-alive>
                     <router-view></router-view>
                 </keep-alive>
@@ -41,7 +50,8 @@
     },
     computed: {
         ...mapGetters([
-            "showLogin"
+            "showLogin",
+            "isAuth"
         ])
     },
     methods: {
