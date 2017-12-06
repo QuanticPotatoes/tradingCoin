@@ -11,18 +11,23 @@
                             <v-text-field
                                 label="E-mail"
                                 type="email"
+                                v-model="email"
+                                :disabled="isLoading"
                                 required
                             >
                             </v-text-field>
                             <v-text-field
                                 label="Password"
                                 type="password"
+                                v-model="password"
+                                :disabled="isLoading"
                                 required
                             >
                             </v-text-field>
                             <v-btn 
-                                @click="submit" 
-                                primary="blue darken-1"
+                                @click="logUser({ email, password })" 
+                                :loading="isLoading"
+                                primary
                                 class="ma-0"
                                 style="width: 100%"
                                 >{{ $t('login') }}</v-btn>
@@ -40,10 +45,21 @@ import store from '../store';
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
+    data() {
+        return {
+            email: "",
+            password: "",
+        }
+    },
     computed: {
         ...mapGetters([
-            "showLogin"
+            "isLoading"
+        ]),
+    },
+    methods: {
+        ...mapActions([
+            "logUser"
         ])
-    },   
+    }
 }
 </script>
