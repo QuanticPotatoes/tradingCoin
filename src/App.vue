@@ -3,7 +3,13 @@
         <transition>
         <div v-if="!showLogin">
             <main>
-                <v-toolbar class="elevation-0 transparent" style="z-index: 1;">
+                <v-toolbar
+                    class="elevation-0 transparent"
+                    style="z-index: 1;"
+                    absolute
+                    scroll-off-screen
+                    scroll-target=".scrolling-techniques"
+                    >
                     <v-toolbar-title style="color: white;">
                         <h6><v-icon style="color: white;">equalizer</v-icon> {{ $t('title') }}</h6>
                         </v-toolbar-title>
