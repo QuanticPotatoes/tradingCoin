@@ -1,6 +1,7 @@
 <template>
     <v-container fluid class="pa-0">
         <div id="presentation_bg" class="elevation-5">
+            <img src="public/curve.svg" class="curve animated fadeInUp">
         </div>
         <v-flex xs10 sm8 md5 lg10 class="" style="">
                 <transition name="fade">
@@ -30,16 +31,16 @@
             </div>
         </v-flex>
         <section id="chart-section">
-            <v-card>
-                coucou
-            </v-card>
+            <v-flex lg10 style="margin: auto;">
+                <v-card>
+                    coucou
+                </v-card>
+            </v-flex>
         </section>
     </v-container>
 </template>
 
 <script>
-  import particlesJS from 'particle.js';
-
   export default {
     data() {
       return {
@@ -105,11 +106,17 @@
 
 #chart-section {
     background: black;
-    margin-top: 1050px;
+    margin-top: 180px;
 }
 
 #presentation_robot img {
     width: 100%;
+}
+
+.curve {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
 }
 </style>
 

@@ -13,8 +13,6 @@
                                 type="email"
                                 v-model="email"
                                 :disabled="isLoading"
-                                :rules="[() => 'Username or Password is incorrect.']"
-                                error
                                 required
                             >
                             </v-text-field>
