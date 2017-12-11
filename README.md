@@ -1,6 +1,6 @@
-# tradingcoin
+# :moneybag: tradingCoin :moneybag:
 
-> Nuxt.js project
+Trading application for crypto concurrency
 
 ## Build Setup
 
