@@ -1,5 +1,8 @@
 import Koa from 'koa';
+import mount from 'koa-mount';
 import { Nuxt, Builder } from 'nuxt';
+
+import api from './api';
 
 async function start () {
   const app = new Koa();
@@ -18,6 +21,8 @@ async function start () {
     const builder = new Builder(nuxt);
     await builder.build();
   }
+
+  app.use(mount('/api', api));
 
   app.use(async (ctx, next) => {
     await next();
