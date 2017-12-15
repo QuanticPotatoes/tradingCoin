@@ -19,7 +19,7 @@ module.exports = {
   ** Global CSS
   */
   build: {
-    vendor: ['vuetify', 'vue-i18n'],
+    vendor: ['vuetify', 'vue-i18n', 'axios'],
     loader: [
       {
         test: /\/.styl$/,

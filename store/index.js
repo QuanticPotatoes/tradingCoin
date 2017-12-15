@@ -11,12 +11,24 @@ export const getters = ({ state }) => ({
 });
 
 export const actions = {
-  logUser: ({ commit }, user) => {
-    console.log(user);
-    axios.post('/api/login', {
-      email: user.email,
-      password: user.password
-    });
+  nuxtServerInit ({ commit }, { req }) {
+    if (req.session) {
+      
+    }
+  },
+  logUser: ({ commit }, { email, password }) => {
+    try {
+      axios.post('/api/login', {
+        email,
+        password
+      });
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        throw new Error('Bad credentials');
+      }
+
+      throw error;
+    }
   }
 };
 

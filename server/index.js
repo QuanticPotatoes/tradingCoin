@@ -1,5 +1,8 @@
 import Koa from 'koa';
 import mount from 'koa-mount';
+import bodyparser from 'koa-bodyparser';
+import session from 'koa-session';
+
 import { Nuxt, Builder } from 'nuxt';
 
 import api from './api';
@@ -22,6 +25,9 @@ async function start () {
     await builder.build();
   }
 
+  app.keys = ['i love potatoes'];
+  app.use(session(app));
+  app.use(bodyparser());
   app.use(mount('/api', api));
 
   app.use(async (ctx, next) => {
