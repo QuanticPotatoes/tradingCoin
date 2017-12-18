@@ -3,7 +3,7 @@ import axios from 'axios';
 export const state = () => ({
   locales: ['en', 'fr'],
   locale: 'en',
-  isAuth: false
+  authUser: null
 });
 
 export const getters = ({ state }) => ({
@@ -12,16 +12,18 @@ export const getters = ({ state }) => ({
 
 export const actions = {
   nuxtServerInit ({ commit }, { req }) {
-    if (req.session) {
-      
+    if (req.session && req.session.authUser) {
+      commit('SET_USER', req.session.authUser);
     }
   },
-  logUser: ({ commit }, { email, password }) => {
+  logUser: async ({ commit }, { email, password }) => {
     try {
-      axios.post('/api/login', {
+      const { data } = await axios.post('/api/login', {
         email,
         password
       });
+
+      commit('SET_USER', data);
     } catch (error) {
       if (error.response && error.response.status === 401) {
         throw new Error('Bad credentials');
@@ -37,5 +39,8 @@ export const mutations = {
     if (state.locales.indexOf(locale) !== -1) {
       state.locale = locale;
     }
+  },
+  SET_USER (state, user) {
+    state.authUser = user;
   }
 };

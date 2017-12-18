@@ -13,7 +13,10 @@
   </section>
 </template>
 <script>
+
+
 export default {
+  middleware: 'auth',
   asyncData ({ req }) {
     return {
       name: req ? 'server' : 'client'

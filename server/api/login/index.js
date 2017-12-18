@@ -7,8 +7,9 @@ const router = new Router();
 router.post('/', (ctx, next) => {
   const { email, password } = ctx.request.body;
   if (email === 'admin' && password === 'password') {
-    ctx.session.authUser = { username: 'admin' };
-    ctx.response.body = { username: 'admin' };
+    const user = { username: 'admin' };
+    ctx.session.authUser = user;
+    ctx.body = user;
     return;
   }
   ctx.throw(401, 'bad credentials');

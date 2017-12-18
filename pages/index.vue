@@ -30,13 +30,6 @@
                 <img src="~/assets/img/exploite.png" alt="">
             </div>
         </v-flex>
-        <!-- <section id="chart-section">
-            <v-flex lg10 style="margin: auto;">
-                <v-card>
-                    coucou
-                </v-card>
-            </v-flex>
-        </section> -->
     </v-container>
 </template>
 
