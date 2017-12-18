@@ -65,7 +65,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 11);
+/******/ 	return __webpack_require__(__webpack_require__.s = 12);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -78,16 +78,10 @@ module.exports = require("koa");
 /* 1 */
 /***/ function(module, exports) {
 
-module.exports = require("koa-bodyparser");
-
-/***/ },
-/* 2 */
-/***/ function(module, exports) {
-
 module.exports = require("koa-mount");
 
 /***/ },
-/* 3 */
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -117,7 +111,7 @@ module.exports = {
 };
 
 /***/ },
-/* 4 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -131,11 +125,11 @@ var _koa = __webpack_require__(0);
 
 var _koa2 = _interopRequireDefault(_koa);
 
-var _koaMount = __webpack_require__(2);
+var _koaMount = __webpack_require__(1);
 
 var _koaMount2 = _interopRequireDefault(_koaMount);
 
-var _login = __webpack_require__(9);
+var _login = __webpack_require__(10);
 
 var _login2 = _interopRequireDefault(_login);
 
@@ -148,31 +142,43 @@ app.use((0, _koaMount2.default)('/login', _login2.default));
 exports.default = app;
 
 /***/ },
-/* 5 */
+/* 4 */
 /***/ function(module, exports) {
 
 module.exports = require("babel-runtime/core-js/promise");
 
 /***/ },
-/* 6 */
+/* 5 */
 /***/ function(module, exports) {
 
 module.exports = require("babel-runtime/helpers/asyncToGenerator");
 
 /***/ },
-/* 7 */
+/* 6 */
 /***/ function(module, exports) {
 
 module.exports = require("babel-runtime/regenerator");
 
 /***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+module.exports = require("koa-bodyparser");
+
+/***/ },
 /* 8 */
+/***/ function(module, exports) {
+
+module.exports = require("koa-session");
+
+/***/ },
+/* 9 */
 /***/ function(module, exports) {
 
 module.exports = require("nuxt");
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -186,7 +192,7 @@ var _koa = __webpack_require__(0);
 
 var _koa2 = _interopRequireDefault(_koa);
 
-var _koaRouter = __webpack_require__(10);
+var _koaRouter = __webpack_require__(11);
 
 var _koaRouter2 = _interopRequireDefault(_koaRouter);
 
@@ -201,8 +207,9 @@ router.post('/', function (ctx, next) {
       password = _ctx$request$body.password;
 
   if (email === 'admin' && password === 'password') {
-    ctx.session.authUser = { username: 'admin' };
-    ctx.response.body = { username: 'admin' };
+    var user = { username: 'admin' };
+    ctx.session.authUser = user;
+    ctx.body = user;
     return;
   }
   ctx.throw(401, 'bad credentials');
@@ -214,27 +221,27 @@ app.use(router.allowedMethods());
 exports.default = app;
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 module.exports = require("koa-router");
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _regenerator = __webpack_require__(7);
+var _regenerator = __webpack_require__(6);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _promise = __webpack_require__(5);
+var _promise = __webpack_require__(4);
 
 var _promise2 = _interopRequireDefault(_promise);
 
-var _asyncToGenerator2 = __webpack_require__(6);
+var _asyncToGenerator2 = __webpack_require__(5);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -250,7 +257,7 @@ var start = function () {
             app = new _koa2.default();
             host = process.env.HOST || '127.0.0.1';
             port = process.env.PORT || 3000;
-            config = __webpack_require__(3);
+            config = __webpack_require__(2);
 
             config.dev = !(app.env === 'production');
 
@@ -322,33 +329,27 @@ var _koa = __webpack_require__(0);
 
 var _koa2 = _interopRequireDefault(_koa);
 
-var _koaMount = __webpack_require__(2);
+var _koaMount = __webpack_require__(1);
 
 var _koaMount2 = _interopRequireDefault(_koaMount);
 
-var _koaBodyparser = __webpack_require__(1);
+var _koaBodyparser = __webpack_require__(7);
 
 var _koaBodyparser2 = _interopRequireDefault(_koaBodyparser);
 
-var _koaSession = __webpack_require__(12);
+var _koaSession = __webpack_require__(8);
 
 var _koaSession2 = _interopRequireDefault(_koaSession);
 
-var _nuxt = __webpack_require__(8);
+var _nuxt = __webpack_require__(9);
 
-var _api = __webpack_require__(4);
+var _api = __webpack_require__(3);
 
 var _api2 = _interopRequireDefault(_api);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 start();
-
-/***/ },
-/* 12 */
-/***/ function(module, exports) {
-
-module.exports = require("koa-session");
 
 /***/ }
 /******/ ]);
