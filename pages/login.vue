@@ -46,7 +46,6 @@
 
 <script>
 
-import store from '../store';
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
@@ -61,9 +60,16 @@ export default {
     computed: {
     },
     methods: {
-        ...mapActions([
-            "logUser"
-        ])
+        logUser(payload) {
+                this.isLoading = true;
+            try {
+                this.$store.dispatch('logUser', payload);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                this.isLoading = false;
+            }
+        }
     }
 }
 </script>

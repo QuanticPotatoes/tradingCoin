@@ -1,0 +1,8 @@
+{
+    "dbConfig": {
+
+    },
+    "app": {
+        "secret": "i love potatoes"
+    }
+}
